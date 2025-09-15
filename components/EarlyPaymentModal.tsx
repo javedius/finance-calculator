@@ -117,11 +117,11 @@ export default function EarlyPaymentModal({ isOpen, onClose, onAdd, loanDate, ma
           </div>
         </div>
         
-        <div className="flex gap-2 pt-4">
-          <Button type="submit" className="flex-1">
+        <div className="flex flex-col sm:flex-row gap-2 pt-4">
+          <Button type="submit" className="w-full sm:flex-1">
             Добавить
           </Button>
-          <Button type="button" variant="secondary" onClick={handleClose} className="flex-1">
+          <Button type="button" variant="secondary" onClick={handleClose} className="w-full sm:flex-1">
             Отмена
           </Button>
         </div>

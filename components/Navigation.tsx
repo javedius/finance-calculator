@@ -12,11 +12,11 @@ export default function Navigation() {
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
-            <h1 className="text-xl font-semibold text-gray-900">
+            <h1 className="text-lg sm:text-xl font-semibold text-gray-900">
               Финансовый калькулятор
             </h1>
           </div>
-          <div className="flex space-x-8">
+          <div className="hidden md:flex space-x-8">
             {navigationItems.map((item) => (
               <Link
                 key={item.name}
@@ -30,6 +30,19 @@ export default function Navigation() {
                 {item.name}
               </Link>
             ))}
+          </div>
+          <div className="md:hidden">
+            <select
+              value={pathname}
+              onChange={(e) => window.location.href = e.target.value}
+              className="text-sm font-medium bg-transparent border-none outline-none text-gray-600"
+            >
+              {navigationItems.map((item) => (
+                <option key={item.name} value={item.href}>
+                  {item.name}
+                </option>
+              ))}
+            </select>
           </div>
         </div>
       </div>

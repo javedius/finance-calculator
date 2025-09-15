@@ -33,7 +33,7 @@ export default function TaxCalculator() {
             Введите ваш месячный доход для расчета налога по прогрессивной шкале
           </p>
           
-          <div className="flex gap-4">
+          <div className="flex flex-col sm:flex-row gap-4">
             <div className="flex-1">
               <Input
                 label="Месячный доход (руб.)"
@@ -45,7 +45,7 @@ export default function TaxCalculator() {
               />
             </div>
             <div className="flex gap-2 items-end">
-              <Button variant="secondary" onClick={handleClear}>
+              <Button variant="secondary" onClick={handleClear} className="w-full sm:w-auto">
                 Очистить
               </Button>
             </div>
@@ -105,17 +105,18 @@ export default function TaxCalculator() {
       )}
 
       {calculation && (
-        <Card>
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">Детализация по месяцам</h3>
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm">
+      <Card>
+        <h3 className="text-lg font-semibold text-gray-900 mb-4">Детализация по месяцам</h3>
+        <div className="overflow-x-auto -mx-4 sm:mx-0">
+          <div className="min-w-full px-4 sm:px-0">
+            <table className="w-full text-xs sm:text-sm">
               <thead>
                 <tr className="border-b border-gray-200">
                   <th className="text-left py-2">Месяц</th>
-                  <th className="text-right py-2">Доход</th>
-                  <th className="text-right py-2">Ставка НДФЛ</th>
+                  <th className="text-right py-2 hidden sm:table-cell">Доход</th>
+                  <th className="text-right py-2">Ставка</th>
                   <th className="text-right py-2">Налог</th>
-                  <th className="text-right py-2">Чистый доход</th>
+                  <th className="text-right py-2 hidden sm:table-cell">Чистый доход</th>
                 </tr>
               </thead>
               <tbody>
@@ -143,23 +144,24 @@ export default function TaxCalculator() {
                   return (
                     <tr key={index} className="border-b border-gray-100">
                       <td className="py-2 font-medium">{monthNames[index]}</td>
-                      <td className="py-2 text-right">{formatCurrency(calculation.monthlyIncome)}</td>
+                      <td className="py-2 text-right hidden sm:table-cell">{formatCurrency(calculation.monthlyIncome)}</td>
                       <td className="py-2 text-right text-gray-600 font-medium">{effectiveRate.toFixed(1)}%</td>
                       <td className="py-2 text-right text-red-600">{formatCurrency(monthlyTax)}</td>
-                      <td className="py-2 text-right text-green-600">{formatCurrency(monthlyNetIncome)}</td>
+                      <td className="py-2 text-right text-green-600 hidden sm:table-cell">{formatCurrency(monthlyNetIncome)}</td>
                     </tr>
                   )
                 })}
                 <tr className="border-t-2 border-gray-300 font-semibold">
                   <td className="py-2">Итого за год:</td>
-                  <td className="py-2 text-right">{formatCurrency(calculation.annualIncome)}</td>
+                  <td className="py-2 text-right hidden sm:table-cell">{formatCurrency(calculation.annualIncome)}</td>
                   <td className="py-2 text-right text-gray-600 font-medium">{((calculation.totalTax / calculation.annualIncome) * 100).toFixed(1)}%</td>
                   <td className="py-2 text-right text-red-600">{formatCurrency(calculation.totalTax)}</td>
-                  <td className="py-2 text-right text-green-600">{formatCurrency(calculation.netIncome)}</td>
+                  <td className="py-2 text-right text-green-600 hidden sm:table-cell">{formatCurrency(calculation.netIncome)}</td>
                 </tr>
               </tbody>
             </table>
           </div>
+        </div>
         </Card>
       )}
 

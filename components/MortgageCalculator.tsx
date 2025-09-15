@@ -66,7 +66,7 @@ export default function MortgageCalculator() {
             Введите параметры ипотеки для расчета ежемесячных платежей
           </p>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <Input
               label="Сумма кредита (руб.)"
               type="number"
@@ -158,11 +158,11 @@ export default function MortgageCalculator() {
             </div>
           </div>
           
-          <div className="flex gap-2">
-            <Button onClick={() => setIsModalOpen(true)}>
+          <div className="flex flex-col sm:flex-row gap-2">
+            <Button onClick={() => setIsModalOpen(true)} className="w-full sm:w-auto">
               Добавить досрочное погашение
             </Button>
-            <Button variant="secondary" onClick={clearAll}>
+            <Button variant="secondary" onClick={clearAll} className="w-full sm:w-auto">
               Очистить все
             </Button>
           </div>
@@ -285,17 +285,18 @@ export default function MortgageCalculator() {
 
           <Card>
             <h3 className="text-lg font-semibold text-gray-900 mb-4">Полный график платежей</h3>
-            <div className="overflow-x-auto max-h-96">
-              <table className="w-full text-sm">
-                <thead className="sticky top-0 bg-white">
-                  <tr className="border-b border-gray-200">
-                    <th className="text-left py-2">Месяц</th>
-                    <th className="text-right py-2">Платеж</th>
-                    <th className="text-right py-2">Основной долг</th>
-                    <th className="text-right py-2">Проценты</th>
-                    <th className="text-right py-2">Остаток</th>
-                  </tr>
-                </thead>
+            <div className="overflow-x-auto max-h-96 -mx-4 sm:mx-0">
+              <div className="min-w-full px-4 sm:px-0">
+                <table className="w-full text-xs sm:text-sm">
+                  <thead className="sticky top-0 bg-white">
+                    <tr className="border-b border-gray-200">
+                      <th className="text-left py-2">Месяц</th>
+                      <th className="text-right py-2">Платеж</th>
+                      <th className="text-right py-2 hidden sm:table-cell">Основной долг</th>
+                      <th className="text-right py-2 hidden sm:table-cell">Проценты</th>
+                      <th className="text-right py-2">Остаток</th>
+                    </tr>
+                  </thead>
                 <tbody>
                   {calculation.paymentSchedule.map((payment) => (
                     <tr key={payment.month} className={`border-b border-gray-100 hover:bg-gray-50 ${payment.isEarlyPayment ? 'bg-green-50' : ''}`}>
@@ -320,7 +321,7 @@ export default function MortgageCalculator() {
                           </div>
                         )}
                       </td>
-                      <td className="py-2 text-right">
+                      <td className="py-2 text-right hidden sm:table-cell">
                         <div>{formatCurrency(payment.principal)}</div>
                         {payment.isEarlyPayment && (
                           <div className="text-xs text-green-600">
@@ -328,12 +329,13 @@ export default function MortgageCalculator() {
                           </div>
                         )}
                       </td>
-                      <td className="py-2 text-right text-red-600">{formatCurrency(payment.interest)}</td>
+                      <td className="py-2 text-right text-red-600 hidden sm:table-cell">{formatCurrency(payment.interest)}</td>
                       <td className="py-2 text-right">{formatCurrency(payment.remainingBalance)}</td>
                     </tr>
                   ))}
                 </tbody>
-              </table>
+                </table>
+              </div>
             </div>
           </Card>
         </div>

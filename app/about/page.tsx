@@ -9,7 +9,7 @@ export default function About() {
         description="Информация о финансовом калькуляторе"
       />
       
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <Card>
           <h2 className="text-xl font-semibold text-gray-900 mb-4">Возможности</h2>
           <ul className="space-y-2 text-gray-600">
@@ -32,7 +32,7 @@ export default function About() {
           </ul>
         </Card>
 
-        <Card className="lg:col-span-2">
+        <Card className="md:col-span-2">
           <h2 className="text-xl font-semibold text-gray-900 mb-4">Прогрессивная шкала НДФЛ</h2>
           <p className="text-gray-600 mb-4">
             С 1 января 2024 года в России действует прогрессивная шкала налогообложения доходов физических лиц. 
