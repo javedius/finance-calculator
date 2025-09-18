@@ -54,7 +54,6 @@ const insuranceStructuredData = {
 
 export default function InsuranceContributionsPage() {
   const breadcrumbItems = [
-    { name: 'Налоги', href: '/taxes' },
     { name: 'Страховые взносы', href: '/insurance-contributions' }
   ]
 

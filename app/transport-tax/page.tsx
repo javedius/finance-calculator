@@ -54,7 +54,6 @@ const transportStructuredData = {
 
 export default function TransportTaxPage() {
   const breadcrumbItems = [
-    { name: 'Налоги', href: '/taxes' },
     { name: 'Транспортный налог', href: '/transport-tax' }
   ]
 

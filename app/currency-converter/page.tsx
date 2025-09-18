@@ -54,7 +54,6 @@ const currencyStructuredData = {
 
 export default function CurrencyConverterPage() {
   const breadcrumbItems = [
-    { name: 'Инструменты', href: '/tools' },
     { name: 'Конвертер валют', href: '/currency-converter' }
   ]
 

@@ -54,7 +54,6 @@ const mortgageStructuredData = {
 
 export default function MortgagePage() {
   const breadcrumbItems = [
-    { name: 'Кредиты', href: '/loans' },
     { name: 'Ипотечный калькулятор', href: '/mortgage' }
   ]
 

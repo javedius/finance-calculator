@@ -54,7 +54,6 @@ const energySavingsStructuredData = {
 
 export default function EnergySavingsPage() {
   const breadcrumbItems = [
-    { name: 'Энергетика', href: '/energy' },
     { name: 'Энергосбережение', href: '/energy-savings' }
   ]
 

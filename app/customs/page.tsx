@@ -54,7 +54,6 @@ const customsStructuredData = {
 
 export default function CustomsPage() {
   const breadcrumbItems = [
-    { name: 'Инструменты', href: '/tools' },
     { name: 'Таможенный калькулятор', href: '/customs' }
   ]
 

@@ -54,7 +54,6 @@ const pensionStructuredData = {
 
 export default function PensionSavingsPage() {
   const breadcrumbItems = [
-    { name: 'Инвестиции', href: '/investments' },
     { name: 'Пенсионные накопления', href: '/pension-savings' }
   ]
 

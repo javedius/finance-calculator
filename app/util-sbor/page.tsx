@@ -54,7 +54,6 @@ const utilSborStructuredData = {
 
 export default function UtilSborPage() {
   const breadcrumbItems = [
-    { name: 'Автомобили', href: '/cars' },
     { name: 'Утилизационный сбор', href: '/util-sbor' }
   ]
 

@@ -54,7 +54,6 @@ const utilitiesStructuredData = {
 
 export default function UtilitiesPage() {
   const breadcrumbItems = [
-    { name: 'ЖКХ', href: '/housing' },
     { name: 'Коммунальные услуги', href: '/utilities' }
   ]
 

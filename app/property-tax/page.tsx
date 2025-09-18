@@ -54,7 +54,6 @@ const propertyStructuredData = {
 
 export default function PropertyTaxPage() {
   const breadcrumbItems = [
-    { name: 'Налоги', href: '/taxes' },
     { name: 'Налог на имущество', href: '/property-tax' }
   ]
 

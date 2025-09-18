@@ -53,7 +53,6 @@ const ndflStructuredData = {
 
 export default function NDFLPage() {
   const breadcrumbItems = [
-    { name: 'Налоги', href: '/taxes' },
     { name: 'НДФЛ калькулятор', href: '/ndfl' }
   ]
 

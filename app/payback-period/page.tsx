@@ -54,7 +54,6 @@ const paybackStructuredData = {
 
 export default function PaybackPeriodPage() {
   const breadcrumbItems = [
-    { name: 'Инвестиции', href: '/investments' },
     { name: 'Срок окупаемости', href: '/payback-period' }
   ]
 

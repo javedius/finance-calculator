@@ -54,7 +54,6 @@ const finesStructuredData = {
 
 export default function FinesPenaltiesPage() {
   const breadcrumbItems = [
-    { name: 'Штрафы', href: '/fines' },
     { name: 'Штрафы и пени', href: '/fines-penalties' }
   ]
 

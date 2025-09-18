@@ -54,7 +54,6 @@ const landStructuredData = {
 
 export default function LandTaxPage() {
   const breadcrumbItems = [
-    { name: 'Налоги', href: '/taxes' },
     { name: 'Земельный налог', href: '/land-tax' }
   ]
 

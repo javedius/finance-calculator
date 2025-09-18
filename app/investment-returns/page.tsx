@@ -54,7 +54,6 @@ const investmentStructuredData = {
 
 export default function InvestmentReturnsPage() {
   const breadcrumbItems = [
-    { name: 'Инвестиции', href: '/investments' },
     { name: 'Доходность инвестиций', href: '/investment-returns' }
   ]
 

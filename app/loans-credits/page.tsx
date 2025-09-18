@@ -54,7 +54,6 @@ const loansStructuredData = {
 
 export default function LoansCreditsPage() {
   const breadcrumbItems = [
-    { name: 'Кредиты', href: '/loans' },
     { name: 'Кредитный калькулятор', href: '/loans-credits' }
   ]
 
