@@ -4,6 +4,9 @@ import { useState } from 'react'
 import Card from './Card'
 import Input from './Input'
 import Button from './Button'
+import ResultCard from './ResultCard'
+import ResultSection from './ResultSection'
+import DataTable from './DataTable'
 import { calculateTax, formatCurrency, TAX_BRACKETS } from '@/utils/taxCalculator'
 
 export default function TaxCalculator() {
@@ -28,8 +31,8 @@ export default function TaxCalculator() {
     <div className="space-y-6">
       <Card>
         <div className="space-y-4">
-          <h2 className="text-xl font-semibold text-gray-900">Расчет НДФЛ</h2>
-          <p className="text-gray-600">
+          <h2 className="card-header">Расчет НДФЛ</h2>
+          <p className="card-description">
             Введите ваш месячный доход для расчета налога по прогрессивной шкале
           </p>
           
@@ -42,6 +45,7 @@ export default function TaxCalculator() {
                 onChange={(e) => setMonthlyIncome(e.target.value)}
                 placeholder="Введите сумму месячного дохода"
                 min="0"
+                required
               />
             </div>
             <div className="flex gap-2 items-end">
@@ -54,142 +58,97 @@ export default function TaxCalculator() {
       </Card>
 
       {calculation && (
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <Card>
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Результаты расчета</h3>
-            <div className="space-y-3">
-              <div className="flex justify-between">
-                <span className="text-gray-600">Месячный доход:</span>
-                <span className="font-medium">{formatCurrency(calculation.monthlyIncome)}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-gray-600">Годовой доход:</span>
-                <span className="font-medium">{formatCurrency(calculation.annualIncome)}</span>
-              </div>
-              <div className="flex justify-between text-red-600">
-                <span>НДФЛ к уплате (в год):</span>
-                <span className="font-semibold">{formatCurrency(calculation.totalTax)}</span>
-              </div>
-              <div className="flex justify-between text-red-600">
-                <span>НДФЛ к уплате (в месяц):</span>
-                <span className="font-semibold">{formatCurrency(calculation.totalTax / 12)}</span>
-              </div>
-              <div className="flex justify-between text-green-600 border-t pt-3">
-                <span className="font-medium">Чистый доход (в год):</span>
-                <span className="font-semibold">{formatCurrency(calculation.netIncome)}</span>
-              </div>
-              <div className="flex justify-between text-green-600">
-                <span className="font-medium">Чистый доход (в месяц):</span>
-                <span className="font-semibold">{formatCurrency(calculation.netIncome / 12)}</span>
-              </div>
-            </div>
-          </Card>
+        <div className="grid-results-2">
+          <ResultSection
+            title="Результаты расчета"
+            items={[
+              { label: 'Месячный доход:', value: formatCurrency(calculation.monthlyIncome) },
+              { label: 'Годовой доход:', value: formatCurrency(calculation.annualIncome) },
+              { label: 'НДФЛ к уплате (в год):', value: formatCurrency(calculation.totalTax), variant: 'danger' },
+              { label: 'НДФЛ к уплате (в месяц):', value: formatCurrency(calculation.totalTax / 12), variant: 'danger' },
+              { label: 'Чистый доход (в год):', value: formatCurrency(calculation.netIncome), variant: 'success', className: 'result-divider' },
+              { label: 'Чистый доход (в месяц):', value: formatCurrency(calculation.netIncome / 12), variant: 'success' }
+            ]}
+          />
 
-          <Card>
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Детализация по ставкам</h3>
-            <div className="space-y-2">
-              {calculation.brackets.map((item, index) => (
-                <div key={index} className="text-sm">
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">{item.bracket.description}:</span>
-                    <span>{formatCurrency(item.taxableAmount)} × {item.bracket.rate * 100}%</span>
-                  </div>
-                  <div className="text-right text-red-600 font-medium">
-                    = {formatCurrency(item.taxAmount)}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </Card>
+          <ResultSection
+            title="Детализация по ставкам"
+            items={calculation.brackets.map((item, index) => ({
+              label: `${item.bracket.description}:`,
+              value: `${formatCurrency(item.taxableAmount)} × ${item.bracket.rate * 100}% = ${formatCurrency(item.taxAmount)}`,
+              variant: 'danger' as const
+            }))}
+          />
         </div>
       )}
 
       {calculation && (
-      <Card>
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">Детализация по месяцам</h3>
-        <div className="overflow-x-auto -mx-4 sm:mx-0">
-          <div className="min-w-full px-4 sm:px-0">
-            <table className="w-full text-xs sm:text-sm">
-              <thead>
-                <tr className="border-b border-gray-200">
-                  <th className="text-left py-2">Месяц</th>
-                  <th className="text-right py-2 hidden sm:table-cell">Доход</th>
-                  <th className="text-right py-2">Ставка</th>
-                  <th className="text-right py-2">Налог</th>
-                  <th className="text-right py-2 hidden sm:table-cell">Чистый доход</th>
-                </tr>
-              </thead>
-              <tbody>
-                {Array.from({ length: 12 }, (_, index) => {
-                  const monthNames = [
-                    'Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь',
-                    'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'
-                  ]
-                  
-                  // Рассчитываем нарастающий доход к концу месяца
-                  const cumulativeIncome = calculation.monthlyIncome * (index + 1)
-                  
-                  // Рассчитываем налог нарастающим итогом
-                  const cumulativeTax = calculateTax(cumulativeIncome).totalTax
-                  
-                  // Налог за текущий месяц = нарастающий налог - налог за предыдущие месяцы
-                  const previousCumulativeTax = index > 0 ? calculateTax(calculation.monthlyIncome * index).totalTax : 0
-                  const monthlyTax = cumulativeTax - previousCumulativeTax
-                  
-                  const monthlyNetIncome = calculation.monthlyIncome - monthlyTax
-                  
-                  // Рассчитываем эффективную ставку налога для месяца
-                  const effectiveRate = calculation.monthlyIncome > 0 ? (monthlyTax / calculation.monthlyIncome) * 100 : 0
-                  
-                  return (
-                    <tr key={index} className="border-b border-gray-100">
-                      <td className="py-2 font-medium">{monthNames[index]}</td>
-                      <td className="py-2 text-right hidden sm:table-cell">{formatCurrency(calculation.monthlyIncome)}</td>
-                      <td className="py-2 text-right text-gray-600 font-medium">{effectiveRate.toFixed(1)}%</td>
-                      <td className="py-2 text-right text-red-600">{formatCurrency(monthlyTax)}</td>
-                      <td className="py-2 text-right text-green-600 hidden sm:table-cell">{formatCurrency(monthlyNetIncome)}</td>
-                    </tr>
-                  )
-                })}
-                <tr className="border-t-2 border-gray-300 font-semibold">
-                  <td className="py-2">Итого за год:</td>
-                  <td className="py-2 text-right hidden sm:table-cell">{formatCurrency(calculation.annualIncome)}</td>
-                  <td className="py-2 text-right text-gray-600 font-medium">{((calculation.totalTax / calculation.annualIncome) * 100).toFixed(1)}%</td>
-                  <td className="py-2 text-right text-red-600">{formatCurrency(calculation.totalTax)}</td>
-                  <td className="py-2 text-right text-green-600 hidden sm:table-cell">{formatCurrency(calculation.netIncome)}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
+        <Card>
+          <h3 className="card-subheader">Детализация по месяцам</h3>
+          <DataTable
+            columns={[
+              { key: 'month', label: 'Месяц', align: 'left' },
+              { key: 'income', label: 'Доход', align: 'right', className: 'hidden sm:table-cell' },
+              { key: 'rate', label: 'Ставка', align: 'right' },
+              { key: 'tax', label: 'Налог', align: 'right' },
+              { key: 'netIncome', label: 'Чистый доход', align: 'right', className: 'hidden sm:table-cell' }
+            ]}
+            data={[
+              ...Array.from({ length: 12 }, (_, index) => {
+                const monthNames = [
+                  'Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь',
+                  'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'
+                ]
+                
+                // Рассчитываем нарастающий доход к концу месяца
+                const cumulativeIncome = calculation.monthlyIncome * (index + 1)
+                
+                // Рассчитываем налог нарастающим итогом
+                const cumulativeTax = calculateTax(cumulativeIncome).totalTax
+                
+                // Налог за текущий месяц = нарастающий налог - налог за предыдущие месяцы
+                const previousCumulativeTax = index > 0 ? calculateTax(calculation.monthlyIncome * index).totalTax : 0
+                const monthlyTax = cumulativeTax - previousCumulativeTax
+                
+                const monthlyNetIncome = calculation.monthlyIncome - monthlyTax
+                
+                // Рассчитываем эффективную ставку налога для месяца
+                const effectiveRate = calculation.monthlyIncome > 0 ? (monthlyTax / calculation.monthlyIncome) * 100 : 0
+                
+                return {
+                  month: monthNames[index],
+                  income: formatCurrency(calculation.monthlyIncome),
+                  rate: `${effectiveRate.toFixed(1)}%`,
+                  tax: formatCurrency(monthlyTax),
+                  netIncome: formatCurrency(monthlyNetIncome)
+                }
+              }),
+              {
+                month: 'Итого за год:',
+                income: formatCurrency(calculation.annualIncome),
+                rate: `${((calculation.totalTax / calculation.annualIncome) * 100).toFixed(1)}%`,
+                tax: formatCurrency(calculation.totalTax),
+                netIncome: formatCurrency(calculation.netIncome)
+              }
+            ]}
+          />
         </Card>
       )}
 
       <Card>
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">Актуальные ставки НДФЛ в 2024 году</h3>
-        <div className="overflow-x-auto">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="border-b border-gray-200">
-                <th className="text-left py-2">Доход в год</th>
-                <th className="text-left py-2">Ставка</th>
-                <th className="text-left py-2">Описание</th>
-              </tr>
-            </thead>
-            <tbody>
-              {TAX_BRACKETS.map((bracket, index) => (
-                <tr key={index} className="border-b border-gray-100">
-                  <td className="py-2">
-                    {bracket.min === 0 ? '0' : formatCurrency(bracket.min)} - 
-                    {bracket.max ? ` ${formatCurrency(bracket.max)}` : ' ∞'}
-                  </td>
-                  <td className="py-2 font-medium">{bracket.rate * 100}%</td>
-                  <td className="py-2 text-gray-600">{bracket.description}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        <h3 className="card-subheader">Актуальные ставки НДФЛ в 2024 году</h3>
+        <DataTable
+          columns={[
+            { key: 'range', label: 'Доход в год', align: 'left' },
+            { key: 'rate', label: 'Ставка', align: 'left' },
+            { key: 'description', label: 'Описание', align: 'left' }
+          ]}
+          data={TAX_BRACKETS.map((bracket) => ({
+            range: bracket.min === 0 ? '0' : `${formatCurrency(bracket.min)} - ${bracket.max ? formatCurrency(bracket.max) : '∞'}`,
+            rate: `${bracket.rate * 100}%`,
+            description: bracket.description
+          }))}
+        />
       </Card>
     </div>
   )

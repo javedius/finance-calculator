@@ -4,6 +4,10 @@ import { useState } from 'react'
 import Input from './Input'
 import Button from './Button'
 import Card from './Card'
+import ResultCard from './ResultCard'
+import ResultSection from './ResultSection'
+import DataTable from './DataTable'
+import Select from './Select'
 import { calculateInvestmentReturns, InvestmentReturnsParams } from '@/utils/investmentReturns'
 
 export default function InvestmentReturnsCalculator() {
@@ -74,9 +78,9 @@ export default function InvestmentReturnsCalculator() {
   return (
     <div className="space-y-6">
       <Card>
-        <h2 className="text-xl font-semibold mb-4">Калькулятор доходности инвестиций</h2>
+        <h2 className="card-header">Калькулятор доходности инвестиций</h2>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="form-grid">
           <Input
             label="Начальная сумма (руб)"
             type="number"
@@ -84,6 +88,7 @@ export default function InvestmentReturnsCalculator() {
             onChange={(e) => handleInputChange('initialAmount', e.target.value)}
             error={errors.initialAmount}
             placeholder="100000"
+            required
           />
 
           <Input
@@ -93,6 +98,7 @@ export default function InvestmentReturnsCalculator() {
             onChange={(e) => handleInputChange('monthlyContribution', e.target.value)}
             error={errors.monthlyContribution}
             placeholder="10000"
+            required
           />
 
           <Input
@@ -102,6 +108,7 @@ export default function InvestmentReturnsCalculator() {
             onChange={(e) => handleInputChange('investmentPeriod', e.target.value)}
             error={errors.investmentPeriod}
             placeholder="10"
+            required
           />
 
           <Input
@@ -112,6 +119,7 @@ export default function InvestmentReturnsCalculator() {
             onChange={(e) => handleInputChange('expectedReturn', e.target.value)}
             error={errors.expectedReturn}
             placeholder="12"
+            required
           />
 
           <Input
@@ -122,33 +130,29 @@ export default function InvestmentReturnsCalculator() {
             onChange={(e) => handleInputChange('taxRate', e.target.value)}
             error={errors.taxRate}
             placeholder="13"
+            required
           />
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Частота капитализации
-            </label>
-            <select
-              value={formData.compoundFrequency}
-              onChange={(e) => handleInputChange('compoundFrequency', e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-              <option value="monthly">Ежемесячно</option>
-              <option value="quarterly">Ежеквартально</option>
-              <option value="yearly">Ежегодно</option>
-            </select>
-          </div>
+          <Select
+            label="Частота капитализации"
+            value={formData.compoundFrequency}
+            onChange={(e) => handleInputChange('compoundFrequency', e.target.value)}
+            options={[
+              { value: 'monthly', label: 'Ежемесячно' },
+              { value: 'quarterly', label: 'Ежеквартально' },
+              { value: 'yearly', label: 'Ежегодно' }
+            ]}
+          />
 
           <div className="md:col-span-2">
-            <label className="flex items-center">
+            <div className="checkbox-item">
               <input
                 type="checkbox"
                 checked={formData.reinvestment}
                 onChange={(e) => handleInputChange('reinvestment', e.target.checked)}
-                className="mr-2"
               />
-              Реинвестирование (налог не взимается)
-            </label>
+              <label>Реинвестирование (налог не взимается)</label>
+            </div>
           </div>
         </div>
 
@@ -161,134 +165,88 @@ export default function InvestmentReturnsCalculator() {
 
       {result && (
         <div className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            <Card>
-              <h3 className="text-lg font-semibold mb-4">Итоговая сумма</h3>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-green-600">
-                  {result.finalAmount.toLocaleString('ru-RU')} руб
-                </div>
-                <div className="text-sm text-gray-500 mt-1">
-                  через {formData.investmentPeriod} лет
-                </div>
-              </div>
-            </Card>
+          <div className="grid-results">
+            <ResultCard
+              title="Итоговая сумма"
+              value={`${result.finalAmount.toLocaleString('ru-RU')} руб`}
+              description={`через ${formData.investmentPeriod} лет`}
+              variant="success"
+            />
 
-            <Card>
-              <h3 className="text-lg font-semibold mb-4">Общие инвестиции</h3>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-blue-600">
-                  {result.totalInvested.toLocaleString('ru-RU')} руб
-                </div>
-                <div className="text-sm text-gray-500 mt-1">
-                  вложено
-                </div>
-              </div>
-            </Card>
+            <ResultCard
+              title="Общие инвестиции"
+              value={`${result.totalInvested.toLocaleString('ru-RU')} руб`}
+              description="вложено"
+              variant="primary"
+            />
 
-            <Card>
-              <h3 className="text-lg font-semibold mb-4">Чистый доход</h3>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-green-600">
-                  {result.netReturn.toLocaleString('ru-RU')} руб
-                </div>
-                <div className="text-sm text-gray-500 mt-1">
-                  прибыль
-                </div>
-              </div>
-            </Card>
+            <ResultCard
+              title="Чистый доход"
+              value={`${result.netReturn.toLocaleString('ru-RU')} руб`}
+              description="прибыль"
+              variant="success"
+            />
 
-            <Card>
-              <h3 className="text-lg font-semibold mb-4">Годовая доходность</h3>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-purple-600">
-                  {result.annualizedReturn}%
-                </div>
-                <div className="text-sm text-gray-500 mt-1">
-                  в год
-                </div>
-              </div>
-            </Card>
+            <ResultCard
+              title="Годовая доходность"
+              value={`${result.annualizedReturn}%`}
+              description="в год"
+              variant="warning"
+            />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <Card>
-              <h3 className="text-lg font-semibold mb-4">Детализация расчетов</h3>
-              <div className="space-y-3">
-                {result.breakdown.map((item, index) => (
-                  <div key={index} className="border-l-4 border-green-200 pl-3">
-                    <div className="font-medium text-gray-900">{item.description}</div>
-                    <div className="text-sm text-gray-600">{item.formula}</div>
-                    <div className="text-sm font-medium text-green-600">
-                      {typeof item.value === 'number' 
-                        ? item.value.toLocaleString('ru-RU') + (item.description.includes('доходность') ? '%' : ' руб')
-                        : item.value
-                      }
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </Card>
+          <div className="grid-results-2">
+            <ResultSection
+              title="Детализация расчетов"
+              items={result.breakdown.map((item) => ({
+                label: item.description,
+                value: typeof item.value === 'number' 
+                  ? `${item.value.toLocaleString('ru-RU')}${item.description.includes('доходность') ? '%' : ' руб'}`
+                  : item.value,
+                variant: 'success' as const
+              }))}
+            />
 
-            <Card>
-              <h3 className="text-lg font-semibold mb-4">Сравнение с банковским депозитом</h3>
-              <div className="space-y-3">
-                <div className="flex justify-between">
-                  <span>Банковский депозит (5% годовых):</span>
-                  <span className="font-medium">
-                    {Math.round(result.totalInvested * Math.pow(1.05, Number(formData.investmentPeriod))).toLocaleString('ru-RU')} руб
-                  </span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Ваши инвестиции:</span>
-                  <span className="font-medium text-green-600">
-                    {result.finalAmount.toLocaleString('ru-RU')} руб
-                  </span>
-                </div>
-                <div className="flex justify-between text-lg font-semibold border-t pt-2">
-                  <span>Дополнительная прибыль:</span>
-                  <span className="text-green-600">
-                    {(result.finalAmount - Math.round(result.totalInvested * Math.pow(1.05, Number(formData.investmentPeriod)))).toLocaleString('ru-RU')} руб
-                  </span>
-                </div>
-              </div>
-            </Card>
+            <ResultSection
+              title="Сравнение с банковским депозитом"
+              items={[
+                {
+                  label: 'Банковский депозит (5% годовых):',
+                  value: `${Math.round(result.totalInvested * Math.pow(1.05, Number(formData.investmentPeriod))).toLocaleString('ru-RU')} руб`
+                },
+                {
+                  label: 'Ваши инвестиции:',
+                  value: `${result.finalAmount.toLocaleString('ru-RU')} руб`,
+                  variant: 'success' as const
+                },
+                {
+                  label: 'Дополнительная прибыль:',
+                  value: `${(result.finalAmount - Math.round(result.totalInvested * Math.pow(1.05, Number(formData.investmentPeriod)))).toLocaleString('ru-RU')} руб`,
+                  variant: 'success' as const,
+                  className: 'result-divider'
+                }
+              ]}
+            />
           </div>
 
           <Card>
-            <h3 className="text-lg font-semibold mb-4">Прогноз роста инвестиций по годам</h3>
-            <div className="overflow-x-auto">
-              <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-gray-50">
-                  <tr>
-                    <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Год</th>
-                    <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Вложено</th>
-                    <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Стоимость</th>
-                    <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Доход</th>
-                    <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase">Налог</th>
-                  </tr>
-                </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
-                  {result.monthlyProjection.slice(0, 10).map((row) => (
-                    <tr key={row.month}>
-                      <td className="px-4 py-2 text-sm text-gray-900">{Math.floor(row.month / 12)}</td>
-                      <td className="px-4 py-2 text-sm text-gray-900">
-                        {row.invested.toLocaleString('ru-RU')}
-                      </td>
-                      <td className="px-4 py-2 text-sm font-medium text-gray-900">
-                        {row.value.toLocaleString('ru-RU')}
-                      </td>
-                      <td className="px-4 py-2 text-sm text-green-600">
-                        {row.return.toLocaleString('ru-RU')}
-                      </td>
-                      <td className="px-4 py-2 text-sm text-red-600">
-                        {row.tax.toLocaleString('ru-RU')}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+            <h3 className="card-subheader">Прогноз роста инвестиций по годам</h3>
+            <DataTable
+              columns={[
+                { key: 'year', label: 'Год', align: 'left' },
+                { key: 'invested', label: 'Вложено', align: 'left' },
+                { key: 'value', label: 'Стоимость', align: 'left' },
+                { key: 'return', label: 'Доход', align: 'left' },
+                { key: 'tax', label: 'Налог', align: 'left' }
+              ]}
+              data={result.monthlyProjection.slice(0, 10).map((row) => ({
+                year: Math.floor(row.month / 12),
+                invested: row.invested.toLocaleString('ru-RU'),
+                value: row.value.toLocaleString('ru-RU'),
+                return: row.return.toLocaleString('ru-RU'),
+                tax: row.tax.toLocaleString('ru-RU')
+              }))}
+            />
           </Card>
         </div>
       )}
