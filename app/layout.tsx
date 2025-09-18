@@ -72,7 +72,7 @@ export const metadata = {
   },
   verification: {
     google: 'ujU5Ygmf_4damxM959wJdeF-iR7LYVNq9Ae1gtoY74Y',
-    yandex: '5e2cf9d57f01d977',
+    yandex: '176946c3bdac3875',
   },
 }
 
