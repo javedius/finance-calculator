@@ -1,9 +1,68 @@
+import { Metadata } from 'next'
 import PageHeader from '@/components/PageHeader'
 import Card from '@/components/Card'
+import Breadcrumbs from '@/components/Breadcrumbs'
+import StructuredData from '@/components/StructuredData'
+
+export const metadata: Metadata = {
+  title: 'О проекте - Финансовый калькулятор | Бесплатные онлайн расчеты',
+  description: 'Финансовый калькулятор - бесплатные онлайн расчеты налогов, ипотеки, кредитов. Актуальные ставки 2024 года. Прогрессивная шкала НДФЛ, страховые взносы, налоги на имущество.',
+  keywords: [
+    'о финансовом калькуляторе',
+    'бесплатные расчеты онлайн',
+    'налоговые калькуляторы',
+    'ипотечные калькуляторы',
+    'кредитные калькуляторы',
+    'прогрессивная шкала НДФЛ',
+    'страховые взносы 2024',
+    'налоги на имущество',
+    'онлайн расчеты РФ'
+  ],
+  openGraph: {
+    title: 'О проекте - Финансовый калькулятор | Бесплатные онлайн расчеты',
+    description: 'Финансовый калькулятор - бесплатные онлайн расчеты налогов, ипотеки, кредитов. Актуальные ставки 2024 года.',
+    type: 'website',
+  },
+  alternates: {
+    canonical: '/about',
+  },
+}
+
+const aboutStructuredData = {
+  '@type': 'AboutPage',
+  name: 'О финансовом калькуляторе',
+  description: 'Информация о проекте финансового калькулятора для расчета налогов, ипотеки и кредитов',
+  mainEntity: {
+    '@type': 'WebApplication',
+    name: 'Финансовый калькулятор',
+    description: 'Бесплатные онлайн калькуляторы для финансовых расчетов',
+    applicationCategory: 'FinanceApplication',
+    operatingSystem: 'Web Browser',
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'RUB',
+    },
+    featureList: [
+      'Расчет НДФЛ по прогрессивной шкале',
+      'Ипотечные калькуляторы',
+      'Кредитные калькуляторы',
+      'Страховые взносы',
+      'Налоги на имущество',
+      'Актуальные ставки 2024 года'
+    ],
+  },
+}
 
 export default function About() {
+  const breadcrumbItems = [
+    { name: 'О проекте', href: '/about' }
+  ]
+
   return (
     <div>
+      <StructuredData type="WebApplication" data={aboutStructuredData} />
+      <Breadcrumbs items={breadcrumbItems} />
       <PageHeader
         title="О проекте"
         description="Информация о финансовом калькуляторе"

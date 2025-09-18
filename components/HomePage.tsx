@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import Card from './Card'
+import SEOContent from './SEOContent'
 import { getNavigationByCategories } from '@/utils/navigation'
 
 export default function HomePage() {
@@ -122,6 +123,9 @@ export default function HomePage() {
           </p>
         </div>
       </div>
+
+      {/* SEO контент */}
+      <SEOContent />
     </div>
   )
 }
