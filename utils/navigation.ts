@@ -119,13 +119,6 @@ export const navigationItems: NavigationItem[] = [
     icon: '💱',
     category: 'Финансы'
   },
-  {
-    name: 'О проекте',
-    href: '/about',
-    description: 'Информация о калькуляторе',
-    icon: 'ℹ️',
-    category: 'Информация'
-  }
 ]
 
 // Функция для добавления новых страниц

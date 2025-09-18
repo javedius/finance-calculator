@@ -101,18 +101,6 @@ export default function Navigation() {
                         </div>
                       </Link>
                     ))}
-                    <div className="border-t border-gray-100 my-1"></div>
-                    <Link
-                      href="/about"
-                      className="flex items-center space-x-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
-                      onClick={() => setActiveDropdown(null)}
-                    >
-                      <span className="text-lg">ℹ️</span>
-                      <div>
-                        <div className="font-medium">О проекте</div>
-                        <div className="text-xs text-gray-500">Информация о калькуляторе</div>
-                      </div>
-                    </Link>
                   </div>
                 </div>
               )}
@@ -167,18 +155,6 @@ export default function Navigation() {
                         </div>
                       </Link>
                     ))}
-                    <div className="border-t border-gray-100 my-1"></div>
-                    <Link
-                      href="/about"
-                      className="flex items-center space-x-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
-                      onClick={() => setActiveDropdown(null)}
-                    >
-                      <span className="text-lg">ℹ️</span>
-                      <div>
-                        <div className="font-medium">О проекте</div>
-                        <div className="text-xs text-gray-500">Информация о калькуляторе</div>
-                      </div>
-                    </Link>
                   </div>
                 </div>
               )}
