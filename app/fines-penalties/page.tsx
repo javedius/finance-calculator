@@ -6,8 +6,8 @@ import StructuredData from '@/components/StructuredData'
 import RelatedCalculators, { relatedCalculators } from '@/components/RelatedCalculators'
 
 export const metadata: Metadata = {
-  title: 'Штрафы и пени калькулятор 2024 - Расчет штрафов онлайн',
-  description: 'Бесплатный калькулятор штрафов и пеней 2024. Расчет штрафов за просрочки налогов, ГИБДД, коммунальных платежей. Пени и неустойки.',
+  title: 'Штрафы и пени калькулятор 2025 - Расчет штрафов онлайн',
+  description: 'Бесплатный калькулятор штрафов и пеней 2025. Расчет штрафов за просрочки налогов, ГИБДД, коммунальных платежей. Пени и неустойки.',
   keywords: [
     'штрафы и пени калькулятор',
     'расчет штрафов',
@@ -16,13 +16,13 @@ export const metadata: Metadata = {
     'налоговые штрафы',
     'коммунальные штрафы',
     'неустойка расчет',
-    'штрафы 2024',
+    'штрафы 2025',
     'пени онлайн',
     'штрафы калькулятор'
   ],
   openGraph: {
-    title: 'Штрафы и пени калькулятор 2024 - Расчет штрафов онлайн',
-    description: 'Бесплатный калькулятор штрафов и пеней 2024. Расчет штрафов за просрочки налогов, ГИБДД, коммунальных платежей.',
+    title: 'Штрафы и пени калькулятор 2025 - Расчет штрафов онлайн',
+    description: 'Бесплатный калькулятор штрафов и пеней 2025. Расчет штрафов за просрочки налогов, ГИБДД, коммунальных платежей.',
     type: 'website',
   },
   alternates: {
@@ -47,7 +47,7 @@ const finesStructuredData = {
     'Коммунальные штрафы',
     'Пени за просрочку',
     'Неустойка',
-    'Штрафы 2024'
+    'Штрафы 2025'
   ],
   screenshot: 'https://finance-calculator.ru/fines-screenshot.jpg',
 }
@@ -63,7 +63,7 @@ export default function FinesPenaltiesPage() {
       <StructuredData type="SoftwareApplication" data={finesStructuredData} />
       <Breadcrumbs items={breadcrumbItems} />
       <PageHeader
-        title="Штрафы и пени калькулятор 2024"
+        title="Штрафы и пени калькулятор 2025"
         description="Расчет штрафов за просрочки налогов, ГИБДД, коммунальных платежей"
         icon="⚠️"
       />
