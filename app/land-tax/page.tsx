@@ -49,7 +49,7 @@ const landStructuredData = {
     'Учет льгот',
     'Налоговые вычеты'
   ],
-  screenshot: 'https://finance-calculator.ru/land-screenshot.jpg',
+  screenshot: 'https://finkalk.ru/land-screenshot.jpg',
 }
 
 export default function LandTaxPage() {

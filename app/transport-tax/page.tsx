@@ -49,7 +49,7 @@ const transportStructuredData = {
     'Региональные ставки',
     'Учет льгот'
   ],
-  screenshot: 'https://finance-calculator.ru/transport-screenshot.jpg',
+  screenshot: 'https://finkalk.ru/transport-screenshot.jpg',
 }
 
 export default function TransportTaxPage() {

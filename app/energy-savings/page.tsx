@@ -49,7 +49,7 @@ const energySavingsStructuredData = {
     'Энергоаудит',
     'Зеленая энергия'
   ],
-  screenshot: 'https://finance-calculator.ru/energy-savings-screenshot.jpg',
+  screenshot: 'https://finkalk.ru/energy-savings-screenshot.jpg',
 }
 
 export default function EnergySavingsPage() {

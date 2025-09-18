@@ -49,7 +49,7 @@ const pensionStructuredData = {
     'Накопительная пенсия',
     'Страховая пенсия'
   ],
-  screenshot: 'https://finance-calculator.ru/pension-screenshot.jpg',
+  screenshot: 'https://finkalk.ru/pension-screenshot.jpg',
 }
 
 export default function PensionSavingsPage() {

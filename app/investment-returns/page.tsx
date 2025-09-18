@@ -49,7 +49,7 @@ const investmentStructuredData = {
     'Различные валюты',
     'График доходности'
   ],
-  screenshot: 'https://finance-calculator.ru/investment-screenshot.jpg',
+  screenshot: 'https://finkalk.ru/investment-screenshot.jpg',
 }
 
 export default function InvestmentReturnsPage() {

@@ -49,7 +49,7 @@ const currencyStructuredData = {
     'Курсы ЦБ РФ',
     'Реальное время'
   ],
-  screenshot: 'https://finance-calculator.ru/currency-screenshot.jpg',
+  screenshot: 'https://finkalk.ru/currency-screenshot.jpg',
 }
 
 export default function CurrencyConverterPage() {

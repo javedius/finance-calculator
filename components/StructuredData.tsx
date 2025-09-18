@@ -49,7 +49,7 @@ export default function StructuredData({ type, data }: StructuredDataProps) {
 export const calculatorStructuredData = {
   name: 'Финансовый калькулятор',
   description: 'Бесплатные онлайн калькуляторы для расчета налогов, ипотеки, кредитов и других финансовых операций',
-  url: 'https://finance-calculator.ru',
+  url: 'https://finkalk.ru',
   applicationCategory: 'FinanceApplication',
   operatingSystem: 'Web Browser',
   offers: {
@@ -68,7 +68,7 @@ export const calculatorStructuredData = {
   inLanguage: 'ru',
   isAccessibleForFree: true,
   browserRequirements: 'Requires JavaScript. Requires HTML5.',
-  screenshot: 'https://finance-calculator.ru/screenshot.jpg',
+  screenshot: 'https://finkalk.ru/screenshot.jpg',
 }
 
 export const faqStructuredData = {

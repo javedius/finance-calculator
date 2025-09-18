@@ -49,7 +49,7 @@ const utilitiesStructuredData = {
     'Вывоз мусора',
     'Региональные тарифы'
   ],
-  screenshot: 'https://finance-calculator.ru/utilities-screenshot.jpg',
+  screenshot: 'https://finkalk.ru/utilities-screenshot.jpg',
 }
 
 export default function UtilitiesPage() {

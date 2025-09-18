@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://finance-calculator.ru'
+  const baseUrl = 'https://finkalk.ru'
   const currentDate = new Date().toISOString()
 
   // Статические страницы

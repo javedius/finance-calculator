@@ -49,7 +49,7 @@ const propertyStructuredData = {
     'Региональные особенности',
     'Кадастровая стоимость'
   ],
-  screenshot: 'https://finance-calculator.ru/property-screenshot.jpg',
+  screenshot: 'https://finkalk.ru/property-screenshot.jpg',
 }
 
 export default function PropertyTaxPage() {

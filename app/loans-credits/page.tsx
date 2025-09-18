@@ -49,7 +49,7 @@ const loansStructuredData = {
     'Потребительские кредиты',
     'Автокредиты'
   ],
-  screenshot: 'https://finance-calculator.ru/loans-screenshot.jpg',
+  screenshot: 'https://finkalk.ru/loans-screenshot.jpg',
 }
 
 export default function LoansCreditsPage() {

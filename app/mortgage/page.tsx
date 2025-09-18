@@ -49,7 +49,7 @@ const mortgageStructuredData = {
     'Расчет переплаты',
     'График платежей'
   ],
-  screenshot: 'https://finance-calculator.ru/mortgage-screenshot.jpg',
+  screenshot: 'https://finkalk.ru/mortgage-screenshot.jpg',
 }
 
 export default function MortgagePage() {

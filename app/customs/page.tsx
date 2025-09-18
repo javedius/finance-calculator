@@ -49,7 +49,7 @@ const customsStructuredData = {
     'Пошлины ЕАЭС',
     'Полная стоимость'
   ],
-  screenshot: 'https://finance-calculator.ru/customs-screenshot.jpg',
+  screenshot: 'https://finkalk.ru/customs-screenshot.jpg',
 }
 
 export default function CustomsPage() {

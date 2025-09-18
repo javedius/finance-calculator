@@ -49,7 +49,7 @@ const paybackStructuredData = {
     'Окупаемость оборудования',
     'Финансовый анализ'
   ],
-  screenshot: 'https://finance-calculator.ru/payback-screenshot.jpg',
+  screenshot: 'https://finkalk.ru/payback-screenshot.jpg',
 }
 
 export default function PaybackPeriodPage() {

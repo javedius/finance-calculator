@@ -48,7 +48,7 @@ const ndflStructuredData = {
     'Социальные налоговые вычеты',
     'Актуальные ставки 2025 года'
   ],
-  screenshot: 'https://finance-calculator.ru/ndfl-screenshot.jpg',
+  screenshot: 'https://finkalk.ru/ndfl-screenshot.jpg',
 }
 
 export default function NDFLPage() {

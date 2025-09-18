@@ -49,7 +49,7 @@ const finesStructuredData = {
     'Неустойка',
     'Штрафы 2025'
   ],
-  screenshot: 'https://finance-calculator.ru/fines-screenshot.jpg',
+  screenshot: 'https://finkalk.ru/fines-screenshot.jpg',
 }
 
 export default function FinesPenaltiesPage() {

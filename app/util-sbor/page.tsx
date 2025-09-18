@@ -49,7 +49,7 @@ const utilSborStructuredData = {
     'Утилизационный сбор',
     'Утильсбор 2025'
   ],
-  screenshot: 'https://finance-calculator.ru/util-sbor-screenshot.jpg',
+  screenshot: 'https://finkalk.ru/util-sbor-screenshot.jpg',
 }
 
 export default function UtilSborPage() {

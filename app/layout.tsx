@@ -33,14 +33,14 @@ export const metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL('https://finance-calculator.ru'),
+  metadataBase: new URL('https://finkalk.ru'),
   alternates: {
     canonical: '/',
   },
   openGraph: {
     type: 'website',
     locale: 'ru_RU',
-    url: 'https://finance-calculator.ru',
+    url: 'https://finkalk.ru',
     siteName: 'Финансовый калькулятор',
     title: 'Финансовый калькулятор - Онлайн расчеты налогов и кредитов',
     description: 'Бесплатные онлайн калькуляторы для расчета налогов, ипотеки, кредитов, пенсионных накоплений. Точные расчеты по актуальным ставкам РФ 2025.',
@@ -71,8 +71,8 @@ export const metadata = {
     },
   },
   verification: {
-    google: 'your-google-verification-code',
-    yandex: 'your-yandex-verification-code',
+    google: 'ujU5Ygmf_4damxM959wJdeF-iR7LYVNq9Ae1gtoY74Y',
+    yandex: '5e2cf9d57f01d977',
   },
 }
 
@@ -89,8 +89,8 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         <PerformanceOptimizer />
-        <GoogleAnalytics measurementId="G-XXXXXXXXXX" />
-        <YandexMetrica counterId="XXXXXXXXXX" />
+        <GoogleAnalytics measurementId="G-1LYXFBDT3Z" />
+        <YandexMetrica counterId="104205147" />
         <div className="min-h-screen bg-gray-50">
           <Navigation />
           <main className="container mx-auto px-4 py-4 sm:py-8">

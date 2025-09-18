@@ -49,7 +49,7 @@ const insuranceStructuredData = {
     'Расчет для самозанятых',
     'Актуальные ставки 2025'
   ],
-  screenshot: 'https://finance-calculator.ru/insurance-screenshot.jpg',
+  screenshot: 'https://finkalk.ru/insurance-screenshot.jpg',
 }
 
 export default function InsuranceContributionsPage() {

@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/private/', '/admin/'],
     },
-    sitemap: 'https://finance-calculator.ru/sitemap.xml',
+    sitemap: 'https://finkalk.ru/sitemap.xml',
   }
 }
