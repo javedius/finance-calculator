@@ -158,12 +158,16 @@ export function calculateMortgage(
 }
 
 export function formatCurrency(amount: number): string {
-  return new Intl.NumberFormat('ru-RU', {
-    style: 'currency',
-    currency: 'RUB',
+  // Округляем до целых рублей
+  const roundedAmount = Math.round(amount)
+  
+  // Форматируем с разделителями тысяч
+  const formatted = roundedAmount.toLocaleString('ru-RU', {
     minimumFractionDigits: 0,
     maximumFractionDigits: 0
-  }).format(amount)
+  })
+  
+  return `${formatted} ₽`
 }
 
 export function formatPercent(rate: number): string {
