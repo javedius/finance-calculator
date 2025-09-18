@@ -31,8 +31,7 @@ export default function Navigation() {
         <div className="flex justify-between items-center h-16">
           {/* Логотип */}
           <div className="flex items-center">
-            <Link href="/" className="flex items-center space-x-2">
-              <span className="text-2xl">🧮</span>
+            <Link href="/" className="flex items-center space-x-2 hover:opacity-80 transition-opacity">
               <h1 className="text-lg sm:text-xl font-semibold text-gray-900">
                 Финансовый калькулятор
               </h1>
@@ -41,6 +40,19 @@ export default function Navigation() {
 
           {/* Десктопная навигация */}
           <div className="hidden lg:flex items-center space-x-6">
+            {/* Главная страница */}
+            <Link
+              href="/"
+              className={`flex items-center space-x-1 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${
+                pathname === '/'
+                  ? 'bg-blue-50 text-blue-600'
+                  : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+              }`}
+            >
+              <span>🏠</span>
+              <span>Главная</span>
+            </Link>
+
             {/* Основные калькуляторы */}
             <div className="flex space-x-4">
               {mainCalculators.slice(0, 3).map((item) => (
@@ -190,6 +202,22 @@ export default function Navigation() {
         {isMobileMenuOpen && (
           <div className="md:hidden border-t border-gray-200 bg-white">
             <div className="px-2 pt-2 pb-3 space-y-1">
+              {/* Главная страница */}
+              <Link
+                href="/"
+                className={`flex items-center space-x-3 px-3 py-2 rounded-md text-base font-medium ${
+                  pathname === '/'
+                    ? 'bg-blue-50 text-blue-600'
+                    : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                }`}
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                <div>
+                  <div>Главная</div>
+                  <div className="text-xs text-gray-500">Обзор всех калькуляторов</div>
+                </div>
+              </Link>
+              
               {Object.entries(categories).map(([category, items]) => (
                 <div key={category}>
                   <div className="px-3 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">

@@ -1,14 +1,5 @@
-import PageHeader from '@/components/PageHeader'
-import TaxCalculator from '@/components/TaxCalculator'
+import HomePage from '@/components/HomePage'
 
 export default function Home() {
-  return (
-    <div>
-      <PageHeader
-        title="Калькулятор налогов"
-        description="Введите ваш месячный доход для расчета НДФЛ по прогрессивной шкале налогообложения в Российской Федерации"
-      />
-      <TaxCalculator />
-    </div>
-  )
+  return <HomePage />
 }
